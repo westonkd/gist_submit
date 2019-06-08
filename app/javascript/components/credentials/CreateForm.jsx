@@ -6,7 +6,6 @@ import { Button } from '@instructure/ui-buttons'
 import { Grid } from '@instructure/ui-layout'
 import { Heading } from '@instructure/ui-elements'
 import { submitForm } from '../shared/RequestUtils'
-import { TextArea } from '@instructure/ui-forms'
 import { TextInput } from '@instructure/ui-text-input'
 import { View } from '@instructure/ui-layout'
 
@@ -14,14 +13,13 @@ const CreateForm = props => {
   const [errorMessage, setErrorMessage] = useState("")
   const [clientId, setClientId] = useState("")
 
-  const success = (response) => {setNewPlatform(JSON.stringify(response.data, null, 2))}
+  const success = (response) => {}
   const error = (errorResponse) => { setErrorMessage(errorResponse.message) }
   const data = () => {
     return {
-      platform: {
-        iss: iss,
-        authorization_uri: authorizationUri,
-        public_key_uri: publicKeyUri
+      client_credential: {
+        client_id: clientId,
+        public_jwk: parsedPublicJwk()
       }
     }
   }
@@ -30,13 +28,21 @@ const CreateForm = props => {
     submitForm(data(), props.formAction, success, error)
   }
 
-  console.log(props)
+  const parsedPublicJwk = () => {
+    try {
+      return JSON.parse(publicJwk)
+    } catch (_error) {
+      return {}
+    }
+  }
+
+  console.log(props.formAction)
 
   return(
     <Grid hAlign="space-around">
       {
         errorMessage && <Grid.Row>
-          <Grid.Col width={8}>
+          <Grid.Col width={4}>
             <Alert
               variant="error"
               closeButtonLabel="Close"
@@ -48,8 +54,8 @@ const CreateForm = props => {
         </Grid.Row>
       }
       <Grid.Row>
-        <Grid.Col width={8}>
-          <Heading margin="x-large 0 0">{`Create Client Credential for ${props.platformISS}`}</Heading>
+        <Grid.Col width={4}>
+          <Heading margin="x-large 0 0">{`Client Client Credential for ${props.platformISS}`}</Heading>
           <form>
             <View display="block" margin="medium 0 0 0">
               <TextInput
@@ -65,12 +71,7 @@ const CreateForm = props => {
                 label="Client ID"
                 layout="stacked"
                 name="client_id"
-                onChange={(e) => {setISS(e.currentTarget.value)}}
-              />
-            </View>
-            <View display="block" margin="medium 0 0 0">
-              <TextArea
-                label="Public JWK"
+                onChange={(e) => {setClientId(e.currentTarget.value)}}
               />
             </View>
             <View display="block" margin="x-small 0 0 0">

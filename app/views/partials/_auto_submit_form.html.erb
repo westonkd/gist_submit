@@ -1,0 +1,9 @@
+<%= form_tag(@form_action, method: @method, id: 'redirect-form') do %>
+  <% @form_params.each do |k, v| %>
+    <%= hidden_field_tag(k, v) %>
+  <% end %>
+<% end %>
+
+<script type="text/javascript">
+  document.getElementById('redirect-form').submit();
+</script>

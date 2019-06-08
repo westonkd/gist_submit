@@ -42,7 +42,7 @@ const CreateForm = props => {
     <Grid hAlign="space-around">
       {
         errorMessage && <Grid.Row>
-          <Grid.Col width={8}>
+          <Grid.Col width={4}>
             <Alert
               variant="error"
               closeButtonLabel="Close"
@@ -55,7 +55,7 @@ const CreateForm = props => {
       }
       {
         !newPlatform && <Grid.Row>
-          <Grid.Col width={8}>
+          <Grid.Col width={4}>
             <Heading margin="x-large 0 0">Create Platform</Heading>
             <form>
               <View display="block" margin="medium 0 0">
@@ -99,7 +99,7 @@ const CreateForm = props => {
       }
       {
         newPlatform && <Grid.Row>
-          <Grid.Col width={8}>
+          <Grid.Col width={4}>
             <Heading margin="x-large 0 medium 0">New Platform</Heading>
             <CodeEditor
               label='Platform'

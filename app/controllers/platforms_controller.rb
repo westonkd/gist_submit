@@ -4,7 +4,7 @@ class PlatformsController < ApplicationController
 
   def create
     @platforms_data = {
-      formAction: platforms_api_create_url,
+      formAction: api_v1_platforms_api_create_url,
       credentialUrl: client_credentials_create_url
     }.to_json
   end

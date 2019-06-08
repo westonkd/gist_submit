@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2019_06_07_015533) do
 
   create_table "client_credentials", force: :cascade do |t|
     t.string "client_id", null: false
-    t.text "client_secret", null: false
     t.jsonb "private_jwk"
     t.jsonb "public_jwk"
     t.datetime "created_at", null: false
