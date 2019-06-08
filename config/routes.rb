@@ -6,9 +6,9 @@ Rails.application.routes.draw do
 
   scope(controller: :message) do
     post 'launch_redirect', action: :launch_redirect, as: :launch_redirect
-    get 'messages/assignment_selection', action: :assignment_selection, as: :assignment_selection
-    get 'messages/course_navigation', action: :course_navigation, as: :course_navigation
-    get 'messages/resource_link', action: :resource_link, as: :resource_link
+    post 'messages/assignment_selection', action: :assignment_selection, as: :assignment_selection
+    post 'messages/course_navigation', action: :course_navigation, as: :course_navigation
+    post 'messages/resource_link', action: :resource_link, as: :resource_link
   end
 
   scope(controller: :login) do
