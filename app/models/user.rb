@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   validates  :username, :avatar_url, :email, :uid, :provider, :oauth_token, presence: true
 
+  has_many :assignments
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.email = auth.info.email

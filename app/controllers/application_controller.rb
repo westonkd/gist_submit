@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :set_application_data
+
   def current_user
     @_current_user ||= User.find_by(id: session[:user_id])
   end
@@ -6,5 +8,13 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     head :unauthorized unless current_user.is_admin?
+  end
+
+  private
+
+  def set_application_data
+    @application_data = {
+      login_path: '/auth/github'
+    }.to_json
   end
 end

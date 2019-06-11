@@ -8,6 +8,7 @@
     "@instructure/ui-code-editor": "^6.3.0",
     "@instructure/ui-elements": "^6.3.0",
     "@instructure/ui-forms": "^6.3.0",
+    "@instructure/ui-icons": "^6.3.0",
     "@instructure/ui-layout": "^6.3.0",
     "@instructure/ui-text-input": "^6.3.0",
     "@instructure/ui-themes": "^6.3.0",

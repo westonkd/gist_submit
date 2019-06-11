@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lti_id: MyString
+  due_date: 2019-06-10 11:45:45
+  owner_lti_id: MyString
+
+two:
+  lti_id: MyString
+  due_date: 2019-06-10 11:45:45
+  owner_lti_id: MyString

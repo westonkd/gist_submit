@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+
   before_action :set_form_values
 
   def login

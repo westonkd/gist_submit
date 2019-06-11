@@ -4,6 +4,7 @@ class MessageController < ApplicationController
   before_action :verfiy_state
 
   def launch_redirect
+    # TODO: Just redirect from here
     render json: jwt_verifier.errors unless jwt_verifier.valid_jwt?
     set_form_values
   end
@@ -12,12 +13,27 @@ class MessageController < ApplicationController
   end
 
   def course_navigation
+    # TODO: Create an overview of all assignments in the course
+    # Also provide a button that creates a new assignment
   end
 
   def resource_link
+    @form_params = {
+      user_id: decoded_jwt[:sub],
+      assignment_id: custom_field('lti_assignment_id'),
+      due_date: custom_field('assignment_due_date'),
+      course_id: custom_field('lti_course_id'),
+      title: custom_field('title')
+    }
+    @method="GET"
+    @form_action = show_assignment_url(lti_id: custom_field('lti_assignment_id'))
   end
 
   private
+
+  def custom_field(key)
+    decoded_jwt.dig('https://purl.imsglobal.org/spec/lti/claim/custom', key)
+  end
 
   def set_form_values
     @form_action = redirect_url

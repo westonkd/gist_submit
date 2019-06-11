@@ -19,7 +19,8 @@ const CreateForm = props => {
     return {
       client_credential: {
         client_id: clientId,
-        public_jwk: parsedPublicJwk()
+        public_jwk: parsedPublicJwk(),
+        platform_id: props.platformId
       }
     }
   }

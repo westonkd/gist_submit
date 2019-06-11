@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     get 'platforms/new', action: :create
   end
 
+  scope(controller: :assignments) do
+    get 'assignments/:lti_id', action: :show, as: :show_assignment
+  end
+
   namespace :api do
     namespace :v1 do
       scope(controller: :tool_configurations_api) do
