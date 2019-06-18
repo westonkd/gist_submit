@@ -1,5 +1,8 @@
 <% if current_user.present? %>
-  <h1>logged in</h1>
+  <div id="gist_list">
+  </div>
+  <%= javascript_pack_tag 'assignments' %>
+  <%= hidden_field_tag :assignments_show_data, @assignments_show_data %>
 <% else %>
   <%= render 'partials/login_form' %>
 <% end %>
