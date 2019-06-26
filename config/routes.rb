@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   scope(controller: :assignments) do
     get 'assignments/:lti_id', action: :show, as: :show_assignment
+    get 'assignments', action: :index, as: :assignments_index
   end
 
   namespace :api do
@@ -33,12 +34,20 @@ Rails.application.routes.draw do
         get 'tool_configurations/:platform_id', action: :show, as: :tool_configurations_api_show
       end
 
+      scope(controller: :assignments_api) do
+        post 'assignments', action: :create, as: :assignments_api_create
+      end
+
       scope(controller: :client_credentials_api) do
         post 'client_credentials', action: :create, as: :client_credentials_api_create
       end
 
       scope(controller: :platforms_api) do
         post 'platforms', action: :create, as: :platforms_api_create
+      end
+
+      scope(controller: :scores_api) do
+        post 'scores', action: :create, as: :scores_api_create
       end
     end
   end

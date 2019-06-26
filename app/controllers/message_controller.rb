@@ -23,7 +23,7 @@ class MessageController < ApplicationController
       assignment_id: custom_field('lti_assignment_id'),
       due_date: custom_field('assignment_due_date'),
       course_id: custom_field('lti_course_id'),
-      title: custom_field('title')
+      title: custom_field('assignment_title')
     }
     @method="GET"
     @form_action = show_assignment_url(lti_id: custom_field('lti_assignment_id'))

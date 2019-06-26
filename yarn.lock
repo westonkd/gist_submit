@@ -842,6 +842,19 @@
     keycode "^2"
     prop-types "^15"
 
+"@instructure/ui-billboard@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@instructure/ui-billboard/-/ui-billboard-6.4.0.tgz#0998e96bc111a631016b9a70feb24aa76d1dbbd2"
+  integrity sha512-mo4RtyUjI2+wd9GWFnVYIrlf1zDjZxuiskxPn4HTZYGicD3Oh1bdvsQ+wGyvAhYixsAdw4dEEqgwAnypJEDLfw==
+  dependencies:
+    "@babel/runtime" "^7"
+    "@instructure/ui-elements" "^6.4.0"
+    "@instructure/ui-layout" "^6.4.0"
+    "@instructure/ui-react-utils" "^6.4.0"
+    "@instructure/ui-themeable" "^6.4.0"
+    classnames "^2"
+    prop-types "^15"
+
 "@instructure/ui-buttons@^6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@instructure/ui-buttons/-/ui-buttons-6.3.0.tgz#768c21e802f98d37d6bd40b472095ad7fe5fa808"

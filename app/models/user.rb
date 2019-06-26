@@ -3,6 +3,10 @@ class User < ApplicationRecord
 
   has_many :assignments
 
+  def self.by_lti_id(lti_id)
+    find_by!(lti_id: lti_id)
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.email = auth.info.email

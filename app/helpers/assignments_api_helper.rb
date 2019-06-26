@@ -1,0 +1,2 @@
+module AssignmentsApiHelper
+end

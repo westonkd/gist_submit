@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     head :unauthorized unless current_user.is_admin?
   end
 
+  def require_user
+    redirect_to :root unless current_user.present?
+  end
+
   private
 
   def set_application_data

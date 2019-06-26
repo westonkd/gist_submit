@@ -1,14 +1,28 @@
 class AssignmentsController < ApplicationController
   require_relative '../clients/gist_client'
 
-  before_action :update_assignment, if: :current_user
+  before_action :update_assignment, if: :current_user, only: :show
   before_action :update_user, if: :current_user
 
   def show
-    @assignments_show_data = {
-      gists: gists.index.map(&:to_hash)
-    }.to_json
+    if current_user.present?
+      @assignments_show_data = {
+        gists: gists.index.map(&:to_hash),
+        create_scores_url: api_v1_scores_api_create_url
+      }.to_json
+    end
   end
+
+  def index
+    if current_user.present?
+      @assignments_index_data = {
+        assignments: Assignment.where(user: current_user),
+        create_assignments_url: api_v1_assignments_api_create_url
+      }.to_json
+    end
+  end
+
+  private
 
   def assignment
     @_assignment ||= begin
@@ -19,8 +33,6 @@ class AssignmentsController < ApplicationController
       )
     end
   end
-
-  private
 
   def gists
     @_gists ||= Clients::GistClient.new(current_user)
@@ -34,8 +46,8 @@ class AssignmentsController < ApplicationController
   end
 
   def update_assignment
-    assignment.due_date ||= params[:due_date]
-    assignment.title ||= params[:title]
+    assignment.due_date = (assignment.due_date.presence || params[:due_date])
+    assignment.title = (assignment.title.presence || params[:title])
     assignment.save!
   end
 end
