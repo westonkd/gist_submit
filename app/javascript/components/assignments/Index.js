@@ -11,7 +11,7 @@ import CreateAssignment from './CreateAssignment'
 
 const Index = props => {
   const [trayOpen, setTrayOpen] = useState(false)
-
+  console.log(props)
   return (
     <View
       height="100rem"
@@ -42,7 +42,7 @@ const Index = props => {
             >
               Close
               </CloseButton>
-            <CreateAssignment createUrl={props.create_assignments_url} />
+            <CreateAssignment createUrl={props.create_assignments_url} assignments={props.assignments} />
           </View>
         </DrawerLayout.Tray>
         <DrawerLayout.Content label="Drawer content example">

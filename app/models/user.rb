@@ -2,6 +2,9 @@ class User < ApplicationRecord
   validates  :username, :avatar_url, :email, :uid, :provider, :oauth_token, presence: true
 
   has_many :assignments
+  has_many :courses
+
+  TEACHER_ROLE = "http://purl.imsglobal.org/vocab/lis/v2/institution/person#Instructor".freeze
 
   def self.by_lti_id(lti_id)
     find_by!(lti_id: lti_id)

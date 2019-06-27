@@ -1,6 +1,7 @@
 class AssignmentsController < ApplicationController
   require_relative '../clients/gist_client'
 
+  before_action :update_course, if: :current_user, only: :show
   before_action :update_assignment, if: :current_user, only: :show
   before_action :update_user, if: :current_user
 
@@ -28,7 +29,17 @@ class AssignmentsController < ApplicationController
     @_assignment ||= begin
       Assignment.find_or_create_by!(
         lti_id: params[:lti_id],
-        lti_course_id: params[:course_id],
+        lti_course_id: params[:canvas_course_id],
+        user: current_user,
+        course: course
+      )
+    end
+  end
+
+  def course
+    @_course ||= begin
+      Course.find_or_create_by!(
+        lti_id: params[:course_id],
         user: current_user
       )
     end
@@ -39,15 +50,21 @@ class AssignmentsController < ApplicationController
   end
 
   def update_user
-    # TODO: Associate the user with the platform.
-    # That way we can lookup the correct credentials
-    # to make an AGS request when we are outside of an LTI
-    # launch
+    current_user.lti_id = current_user.lti_id.presence || params['lti_id']
+    current_user.client_id = params[:client_id]
+    current_user.save!
   end
 
   def update_assignment
-    assignment.due_date = (assignment.due_date.presence || params[:due_date])
-    assignment.title = (assignment.title.presence || params[:title])
+    assignment.due_date = assignment.due_date.presence || params[:due_date]
+    assignment.title = assignment.title.presence || params[:title]
+    assignment.course ||= course
     assignment.save!
+  end
+
+  def update_course
+    course.title = course.title.presence || params[:course_title]
+    course.user = current_user if params[:is_teacher]
+    course.save!
   end
 end

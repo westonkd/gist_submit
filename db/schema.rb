@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_21_152602) do
+ActiveRecord::Schema.define(version: 2019_06_27_143922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2019_06_21_152602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_assignments_on_course_id"
     t.index ["due_date"], name: "index_assignments_on_due_date"
     t.index ["lti_id"], name: "index_assignments_on_lti_id"
     t.index ["user_id"], name: "index_assignments_on_user_id"
@@ -37,6 +39,16 @@ ActiveRecord::Schema.define(version: 2019_06_21_152602) do
     t.bigint "platform_id"
     t.index ["client_id"], name: "index_client_credentials_on_client_id"
     t.index ["platform_id"], name: "index_client_credentials_on_platform_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "lti_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["lti_id"], name: "index_courses_on_lti_id"
+    t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
   create_table "platforms", force: :cascade do |t|
@@ -69,13 +81,16 @@ ActiveRecord::Schema.define(version: 2019_06_21_152602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "lti_id"
+    t.bigint "client_id"
     t.index ["email"], name: "index_users_on_email"
     t.index ["uid"], name: "index_users_on_uid"
     t.index ["username"], name: "index_users_on_username"
   end
 
+  add_foreign_key "assignments", "courses"
   add_foreign_key "assignments", "users"
   add_foreign_key "client_credentials", "platforms"
+  add_foreign_key "courses", "users"
   add_foreign_key "scores", "assignments"
   add_foreign_key "scores", "users"
 end

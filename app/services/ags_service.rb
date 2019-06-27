@@ -6,6 +6,10 @@ class AgsService
     @line_item_url = line_item_url
   end
 
+  def create_assignment
+    byebug
+  end
+
   def submit_score(student_id, score, assignment)
     score = Score.find_or_create_by!(
       user: User.by_lti_id(student_id),

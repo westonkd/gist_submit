@@ -50,7 +50,8 @@ module Lti
           "lti_assignment_id" => "$com.instructure.Assignment.lti.id",
           "assignment_title" => "$Canvas.assignment.title",
           "lti_course_id" => "$vnd.instructure.Course.uuid",
-          "assignment_due_date" => "$Canvas.assignment.dueAt"
+          "assignment_due_date" => "$Canvas.assignment.dueAt",
+          "canvas_course_id" => "$Canvas.course.id"
         },
         "target_link_uri" => resource_link_url(host: @host),
         "oidc_initiation_url" => login_url(host: @host)

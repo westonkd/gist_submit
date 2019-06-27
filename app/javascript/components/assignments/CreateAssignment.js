@@ -4,11 +4,15 @@ import { TextInput } from '@instructure/ui-text-input'
 import { Heading } from '@instructure/ui-elements'
 import { Button } from '@instructure/ui-buttons'
 import { submitForm } from '../shared/RequestUtils'
+import { Select } from '@instructure/ui-select'
 
 const CreateAssignment = props => {
+  const courseIds = () => ([...new Set(props.assignments.map(a => (a.lti_course_id)))])
+
   const [name, setName] = useState("")
-  const [dueDate, setDueDate] = useState("")
-  const [pointsPossible, setPointsPossible] = useState("")
+  const [dueDate, setDueDate] = useState(new Date().toISOString())
+  const [pointsPossible, setPointsPossible] = useState(100)
+  const [courseId, setCourseId] = useState(courseIds()[0])
 
   const error = (error) => {
     console.log(error)
@@ -21,7 +25,8 @@ const CreateAssignment = props => {
   const formData = () => ({
     name,
     due_date: dueDate,
-    points_possible: pointsPossible
+    points_possible: pointsPossible,
+    course_id: courseId
   })
 
   const submit = () => {
@@ -59,6 +64,14 @@ const CreateAssignment = props => {
             label="Points Possible"
             layout="stacked"
             onChange={(e) => {setPointsPossible(e.currentTarget.value)}}
+          />
+        </View>
+        <View display="block" margin="medium 0 0 0">
+          <TextInput
+            value={courseId}
+            label="Course"
+            layout="stacked"
+            onChange={(e) => {setCourseId(e.currentTarget.value)}}
           />
         </View>
         <Button variant="primary" margin="medium 0 0 0" fluidWidth onClick={submit}>
