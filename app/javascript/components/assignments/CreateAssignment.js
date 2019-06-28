@@ -4,7 +4,6 @@ import { TextInput } from '@instructure/ui-text-input'
 import { Heading } from '@instructure/ui-elements'
 import { Button } from '@instructure/ui-buttons'
 import { submitForm } from '../shared/RequestUtils'
-import { Select } from '@instructure/ui-select'
 
 const CreateAssignment = props => {
   const courseIds = () => ([...new Set(props.assignments.map(a => (a.lti_course_id)))])

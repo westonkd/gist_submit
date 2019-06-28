@@ -51,7 +51,7 @@ class AssignmentsController < ApplicationController
 
   def update_user
     current_user.lti_id = current_user.lti_id.presence || params['lti_id']
-    current_user.client_id = params[:client_id]
+    current_user.client_id = params[:client_id] if params[:client_id].present?
     current_user.save!
   end
 

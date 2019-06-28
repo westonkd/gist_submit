@@ -55,7 +55,7 @@ class ClientCredentialsGrantService
       grant_type: 'client_credentials',
       client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
       client_assertion: jws,
-      scope: Lti::ToolConfiguration::SCOPES
+      scope: Lti::ToolConfiguration::SCOPES.join(' ')
     }
   end
 end

@@ -6,7 +6,6 @@ module Api
       before_action :require_admin
 
       def create
-        byebug
         render json: ClientCredential.create!(client_credential_params), status: :created
       end
 
