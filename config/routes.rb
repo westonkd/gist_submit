@@ -54,6 +54,10 @@ Rails.application.routes.draw do
       scope(controller: :submissions_api) do
         post 'submissions', action: :create, as: :submissions_api_create
       end
+
+      scope(controller: :course_memberships_api) do
+        get 'course_memberships/:context_id', action: :show, as: :course_memberships_api_show
+      end
     end
   end
 end

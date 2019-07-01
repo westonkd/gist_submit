@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :courses
 
   TEACHER_ROLE = "http://purl.imsglobal.org/vocab/lis/v2/institution/person#Instructor".freeze
+  NRPS_URL = "http://canvas.docker/api/lti/courses/:context_id/names_and_roles".freeze
 
   def self.by_lti_id(lti_id)
     find_by!(lti_id: lti_id)
