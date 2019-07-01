@@ -18,7 +18,8 @@ class ApplicationController < ActionController::Base
 
   def set_application_data
     @application_data = {
-      login_path: '/auth/github'
+      login_path: '/auth/github',
+      user_id: current_user&.lti_id
     }.to_json
   end
 end

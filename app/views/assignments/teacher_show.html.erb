@@ -1,0 +1,8 @@
+<% if current_user.present? %>
+  <div id="assignment_show">
+  </div>
+  <%= javascript_pack_tag 'assignments_show' %>
+  <%= hidden_field_tag :assignment_teacher_show_data, @assignment_teacher_show_data %>
+<% else %>
+  <%= render 'partials/login_form' %>
+<% end %>

@@ -57,7 +57,7 @@ const Index = props => {
                   theme={{ backgroundColor: '#F5F5F5' }}
                   height="170px"
                   margin="small"
-                  href="http://instructure.com"
+                  href={props.show_assignments_url.replace(":lti_id", assignment.lti_id)}
                   hero={
                     <View>
                       <Heading level="h3">{assignment.title}</Heading>

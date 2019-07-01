@@ -14,10 +14,11 @@ const CreateAssignment = props => {
   const [courseId, setCourseId] = useState(courseIds()[0])
 
   const error = (error) => {
-    console.log(error)
+    console.error(error)
   }
 
   const success = (response) => {
+    alert("Created Assignment")
     console.log(response)
   }
 

@@ -7,6 +7,7 @@ import { View } from '@instructure/ui-layout'
 import { submitForm } from '../shared/RequestUtils'
 
 const Index = props => {
+  console.log(props)
   const collections = () => {
     return {
       1: {
@@ -35,7 +36,7 @@ const Index = props => {
     return gistItems()
   }
 
-  const success = () => {
+  const success = (body) => {
     alert("Submission Created")
   }
 
@@ -44,10 +45,11 @@ const Index = props => {
   }
 
   const submitGist = (item) => {
-    const gist = items()[item.id]
-    console.log(gist)
+    const {url} = items()[item.id]
     submitForm({
-
+      url,
+      user_id: props.userId,
+      assignment_id: props.assignment_lti_id,
     }, props.create_scores_url, success, error)
   }
 

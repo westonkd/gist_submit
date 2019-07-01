@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   scope(controller: :assignments) do
     get 'assignments/:lti_id', action: :show, as: :show_assignment
+    get 'teacher/assignments/:lti_id', action: :teacher_show, as: :teacher_show
     get 'assignments', action: :index, as: :assignments_index
   end
 
@@ -48,6 +49,10 @@ Rails.application.routes.draw do
 
       scope(controller: :scores_api) do
         post 'scores', action: :create, as: :scores_api_create
+      end
+
+      scope(controller: :submissions_api) do
+        post 'submissions', action: :create, as: :submissions_api_create
       end
     end
   end

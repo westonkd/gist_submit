@@ -9,7 +9,18 @@ class AssignmentsController < ApplicationController
     if current_user.present?
       @assignments_show_data = {
         gists: gists.index.map(&:to_hash),
-        create_scores_url: api_v1_scores_api_create_url
+        create_scores_url: api_v1_submissions_api_create_url,
+        assignment_lti_id: assignment.lti_id
+      }.to_json
+    end
+  end
+
+  def teacher_show
+    if current_user.present?
+      assignment_from_params = Assignment.find_by!(lti_id: params[:lti_id])
+      @assignment_teacher_show_data = {
+        assignment: assignment_from_params,
+        submissions: assignment_from_params.submissions
       }.to_json
     end
   end
@@ -18,7 +29,8 @@ class AssignmentsController < ApplicationController
     if current_user.present?
       @assignments_index_data = {
         assignments: Assignment.where(user: current_user),
-        create_assignments_url: api_v1_assignments_api_create_url
+        create_assignments_url: api_v1_assignments_api_create_url,
+        show_assignments_url: teacher_show_url(lti_id: ':lti_id')
       }.to_json
     end
   end
