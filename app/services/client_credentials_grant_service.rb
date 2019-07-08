@@ -14,6 +14,7 @@ class ClientCredentialsGrantService
   def make_request
     Rails.logger.info("AccessToken requested with: #{prepare_request}")
     @request = HTTParty.post(@grant_url, prepare_request)
+    @request
   end
 
   def valid?

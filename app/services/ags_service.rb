@@ -7,7 +7,9 @@ class AgsService
   end
 
   def create_assignment(assignment_options)
-    HTTParty.post(
+    puts access_token
+    sleep 5.minutes
+    res = HTTParty.post(
       @line_item_url,
       {
         body: {
@@ -23,6 +25,9 @@ class AgsService
         }
       }
     )
+    puts res
+    puts res.body
+    res
   end
 
   def submit_score(student_id, score, assignment)

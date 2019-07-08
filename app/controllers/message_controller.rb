@@ -17,6 +17,7 @@ class MessageController < ApplicationController
   def course_navigation
     # TODO: Create an overview of all assignments in the course
     # Also provide a button that creates a new assignment
+    @id_token = launch_params[:id_token]
   end
 
   def resource_link
